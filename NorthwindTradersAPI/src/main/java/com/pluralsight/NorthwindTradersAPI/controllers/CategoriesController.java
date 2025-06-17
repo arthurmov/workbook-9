@@ -22,20 +22,22 @@ public class CategoriesController {
         return categories;
     }
 
-    @RequestMapping(path="/categories/{id}", method = RequestMethod.GET)
-    public List<Category> getCategories(@PathVariable int id){
+    @RequestMapping(path="/categories/{categoryId}", method = RequestMethod.GET)
+    public List<Category> getCategories(@PathVariable int categoryId){
         ArrayList<Category> categories = new ArrayList<>();
 
         categories.add(new Category(1, "Food"));
         categories.add(new Category(2, "Clothes"));
 
-        for(Category c : categories){
-            if (c.getCategoryId() == id){
-                ArrayList<Category> resultingCategories = new ArrayList<>();
-                resultingCategories.add(c);
-                return resultingCategories;
-            }
-        }
-        return new ArrayList<Category>();
+        return categories.stream().filter(c -> c.getCategoryId() == categoryId).toList();
+
+//        for(Category c : categories){
+//            if (c.getCategoryId() == id){
+//                ArrayList<Category> resultingCategories = new ArrayList<>();
+//                resultingCategories.add(c);
+//                return resultingCategories;
+//            }
+//        }
+//        return new ArrayList<Category>();
     }
 }
