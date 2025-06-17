@@ -41,4 +41,26 @@ public class ProductsController {
         }
         return new ArrayList<Product>();
     }
+
+    @RequestMapping(path="/byName/{productName}", method = RequestMethod.GET)
+    public List<Product> getProducts(@PathVariable String productName){
+        ArrayList<Product> products = new ArrayList<>();
+
+        products.add(new Product(1, "Milk", 1, 5.99));
+        products.add(new Product(2, "Bread", 1, 5.99));
+        products.add(new Product(3, "Water", 1, 5.99));
+        products.add(new Product(4, "Pants", 2, 5.99));
+        products.add(new Product(5, "Shirt", 2, 5.99));
+
+        return products.stream().filter(p -> p.getProductName().equalsIgnoreCase(productName)).toList();
+
+//        for(Product p : products){
+//            if (p.getProductId() == id){
+//                ArrayList<Product> resultingProducts = new ArrayList<>();
+//                resultingProducts.add(p);
+//                return resultingProducts;
+//            }
+//        }
+//        return new ArrayList<Product>();
+    }
 }
